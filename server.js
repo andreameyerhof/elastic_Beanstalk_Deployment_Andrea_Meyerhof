@@ -24,21 +24,22 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util.js';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
-  app.get('/filteredimage', async (req, res) => {
-    image_url  = req;
-    if (!image_url) {
-      return res.status(400).send('image url is required');
-    }
-    
-    try {
-      const filteredpath = await filterImageFromURL(image_url);
-      res.status(200).sendFile(filteredpath, () => {
-        deleteLocalFiles([filteredpath]);
-      });
-    } catch (error) {
-      return res.status(422).send('image cannot be processed');
-    }
+app.get('/filteredimage', async (req, res) => {
+ const image_url = req.query.image_url;
+ 
+ if (!image_url) {
+   return res.status(400).send('image url is required');
+ }
+
+ try {
+   const filteredpath = await filterImageFromURL(image_url);
+   res.status(200).sendFile(filteredpath, () => {
+     deleteLocalFiles([filteredpath]);
    });
+ } catch (error) {
+   return res.status(422).send('image cannot be processed');
+ }
+});
    
    // Root Endpoint
    // Displays a simple message to the user
@@ -48,6 +49,6 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util.js';
    
    // Start the Server
    app.listen( port, () => {
-    console.log( 'server running http://localhost:${ port }');
+    console.log( 'server running http://localhost:8082');
     console.log( 'press CTRL+C to stop server' );
    } ); 
