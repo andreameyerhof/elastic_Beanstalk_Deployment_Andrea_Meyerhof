@@ -2,12 +2,13 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "www/server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node www/server.js",
+    "dev": "node server.js",
+    "build": "node server.js"
   },
   "author": "",
   "license": "ISC",
